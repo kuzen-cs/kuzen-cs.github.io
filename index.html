@@ -27,16 +27,26 @@
 <!-- ランスタッド様v2.0起動用スニペット end -->
   
 <!-- ランスタッド様v2.0 KUZENタグ start -->
-<script
-  class="kuzen_tag"
-  type="text/javascript" 
-  src="https://tag.kuzen.io?tag_tracking_code=KT_KwOKdDkaWKI3Fg==429"
-  async
->
-  kuzen_tag.track('start_chat');  
-  kuzen_tag.set_custom_values('visit', {});
-  kuzen_tag.set_custom_values('leave', {});
-  kuzen_tag.set_custom_values('start_chat', {"job_id":"WSTM100001","branch":"1121"});
+<script>
+  window.addEventListener('load', function () {
+    if (typeof kuzen_tag !== 'undefined') {
+      kuzen_tag.track('start_chat');
+
+      kuzen_tag.set_custom_values('visit', {});
+      kuzen_tag.set_custom_values('leave', {});
+      
+      kuzen_tag.set_custom_values('start_chat', {
+        user_info: {
+          job_id: "WSTM100001",
+          branch_code: "1121",
+          branch: "さいたま支店",
+          site_type: "オフィス",
+          job_title: "しばざテスト オフィス 2024/05/02",
+          external_media: ""
+        }
+      });
+    }
+  });
 </script>
 <!-- ランスタッド様v2.0 KUZENタグ end -->
 
