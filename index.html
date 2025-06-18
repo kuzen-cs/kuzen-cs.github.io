@@ -24,11 +24,10 @@
     sub_ele.parentNode.insertBefore(created_element, sub_ele);
   })(document, 'script');
 
-  // function chatOpenButton() {
-  //   window.cu.conversion_page.execute()
-  //   .then(function () {
-  //   window.cu.web_plugin.showWebplugin();
-  //   window.cu.web_plugin.sendMessage("この求人に応募する");
+  function chatOpenButton() {
+    window.cu.web_plugin.showWebplugin();
+    window.cu.web_plugin.sendMessage("この求人に応募する");
+  };
   
 </script>
 <!-- ランスタッド様v2.0起動用スニペット end -->
@@ -75,8 +74,8 @@
 </ul>
 <!-- button test start -->
   <ul class="rs-grid rs-grid--gutter-small rs-grid--width-1-1">
-    <li><a href="javascript:chatOpenButton();" class="rs-button rs-button--primary rs-layout-item-fill rs-display-block">この求人に応募する</a></li>
-    <li><button class="rs-button rs-button--keep rs-button--keep-js" id="cu-embedded-web-plugin-container"><i class="rs-icon rs-icon--star"></i>キープに追加</button></li></ul>
+    <li><a href="javascript:chatOpenButton();" class="rs-button rs-button--primary rs-layout-item-fill rs-display-block" id="cu-embedded-web-plugin-container">この求人に応募する</a></li>
+    <li><button class="rs-button rs-button--keep rs-button--keep-js"><i class="rs-icon rs-icon--star"></i>キープに追加</button></li></ul>
 <!-- button test end -->
 </div>
 </div>
