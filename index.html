@@ -12,26 +12,22 @@
 <script src="https://tag.kuzen.io?tag_tracking_code=KT_KwOKdDkaWKI3Fg==429" async></script>
 
 <script>
+  // kuzen_ready が呼ばれるかの最低限の確認
+  window.addEventListener('kuzen_ready', function () {
+    console.log('✅ kuzen_ready 発火しました');
 
-window.addEventListener('kuzen_ready', function () {
-  const customData = {
-    branch: "さいたま支店",
-    branch_code: "1121",
-    job_id: "WSTM100001",
-    site_type: "オフィス",
-    job_title: "しばざテスト オフィス 2024/05/02",
-    external_media: "1"
-  };
+    const data = {
+      branch: "test",
+      job_id: "TEST123"
+    };
 
-  console.log("📦 カスタム値を送信します:", customData);
+    console.log('📦 カスタム値を送信します:', data);
 
-  kuzen_tag.track('start_chat');
-  kuzen_tag.set_custom_values('visit', {});
-  kuzen_tag.set_custom_values('leave', {});
-  kuzen_tag.set_custom_values('start_chat', customData);
-});
-
+    kuzen_tag.track('start_chat');
+    kuzen_tag.set_custom_values('start_chat', data);
+  });
 </script>
+
 <!-- ランスタッド様v2.0 KUZENタグ end -->
 
 <!-- ランスタッド様v2.0起動用スニペット start -->
