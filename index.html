@@ -53,9 +53,6 @@
   // };
 
   function chatOpenButton() {
-    // チャットUI表示 + 初期メッセージ送信
-    window.cu.web_plugin.showWebplugin();
-    window.cu.web_plugin.sendMessage("この求人に応募する");
 
     // kuzen_tag が存在していれば、start_chat イベントとカスタム値送信
     if (typeof window.kuzen_tag !== 'undefined') {
@@ -72,6 +69,10 @@
       console.warn("kuzen_tag が未定義のため、タグ送信はスキップされました。");
     }
   }
+
+      // チャットUI表示 + 初期メッセージ送信
+    window.cu.web_plugin.showWebplugin();
+    window.cu.web_plugin.sendMessage("この求人に応募する");
   
 </script>
 <!-- ランスタッド様v2.0起動用スニペット end -->
