@@ -38,7 +38,6 @@
 <!-- ランスタッド様v2.0 KUZENタグ start -->
 <script type="text/javascript">
   function chatOpenButton() {
-    // KUZENタグの値をここで明示的に再設定するのが安全
     if (window.kuzen_tag) {
       kuzen_tag.set_custom_values('start_chat', {
         branch: "さいたま支店",
@@ -48,10 +47,16 @@
         job_title: "しばざテスト オフィス 2024/05/02",
         external_media: "1"
       });
+
+      // ✅ カスタム値設定後、track()を改めて発火
+      kuzen_tag.track('start_chat');
     }
 
-    window.cu.web_plugin.showWebplugin();
-    window.cu.web_plugin.sendMessage("この求人に応募する");
+    // ✅ チャット表示
+    if (window.cu && window.cu.web_plugin) {
+      window.cu.web_plugin.showWebplugin();
+      window.cu.web_plugin.sendMessage("この求人に応募する");
+    }
   }
 </script>
 <!-- ランスタッド様v2.0 KUZENタグ end -->
