@@ -8,16 +8,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="index.css">
 
-<!-- KUZENタグ起動 start -->
-<script
-  class="kuzen_tag"
-  type="text/javascript" 
-  src="https://tag.kuzen.io?tag_tracking_code=KT_KwOKdDkaWKI3Fg==429"
-  async
-></script>
-<!-- KUZENタグ起動 end -->
-  
-<!-- ランスタッド様v2.0起動用スニペット start -->
+<!-- ✅ KUZENタグ（1回だけ読み込み） -->
+<script type="text/javascript">
+  const kuzenScript = document.createElement("script");
+  kuzenScript.src = "https://tag.kuzen.io?tag_tracking_code=KT_KwOKdDkaWKI3Fg==429";
+  kuzenScript.async = true;
+  kuzenScript.onload = function () {
+    console.log("✅ KUZENタグが読み込まれました");
+  };
+  document.head.appendChild(kuzenScript);
+</script>
+
+<!-- ✅ ランスタッド様 v2.0 チャット起動スクリプト -->
 <script type="text/javascript">
   var __const = window.__const || [];
   __const['host'] = "https://cbgw.kuzen.io";
@@ -33,37 +35,38 @@
     sub_ele.parentNode.insertBefore(created_element, sub_ele);
   })(document, 'script');
 </script>
-<!-- ランスタッド様v2.0起動用スニペット end -->
 
-<!-- ランスタッド様v2.0 KUZENタグ start -->
-<script>
-  // KUZENタグを動的に読み込み（asyncの副作用を防ぐ）
-  const kuzenScript = document.createElement("script");
-  kuzenScript.src = "https://tag.kuzen.io?tag_tracking_code=KT_KwOKdDkaWKI3Fg==429";
-  kuzenScript.async = true;
-  kuzenScript.onload = function () {
-    console.log("✅ kuzen_tag loaded");
+<!-- ✅ チャットオープンボタン + custom_values + track イベント -->
+<script type="text/javascript">
+  function chatOpenButton() {
+    // KUZENタグが読み込まれていることを確認
+    if (typeof window.kuzen_tag !== "undefined") {
+      // カスタム値を設定
+      kuzen_tag.set_custom_values('start_chat', {
+        branch: "さいたま支店",
+        branch_code: "1121",
+        job_id: "WSTM100001",
+        site_type: "オフィス",
+        job_title: "しばざテスト オフィス 2024/05/02",
+        external_media: "1"
+      });
 
-    // 明示的にcustom_valuesを設定
-    kuzen_tag.set_custom_values('start_chat', {
-      branch: "さいたま支店",
-      branch_code: "1121",
-      job_id: "WSTM100001",
-      site_type: "オフィス",
-      job_title: "しばざテスト オフィス 2024/05/02",
-      external_media: "1"
-    });
+      // イベント送信（custom_valuesを含めて）
+      kuzen_tag.track('start_chat');
+      console.log("✅ custom_values を設定し、track を発火しました");
+    } else {
+      console.warn("⚠ KUZENタグがまだ読み込まれていません");
+    }
 
-    // track()でイベント送信
-    kuzen_tag.track('start_chat');
-    console.log("✅ custom_values sent");
-  };
-
-  document.head.appendChild(kuzenScript);
+    // チャットを表示してメッセージ送信
+    if (window.cu && window.cu.web_plugin) {
+      window.cu.web_plugin.showWebplugin();
+      window.cu.web_plugin.sendMessage("この求人に応募する");
+    } else {
+      console.warn("⚠ チャットが初期化されていません");
+    }
+  }
 </script>
-
-<!-- ランスタッド様v2.0 KUZENタグ end -->
-
 
 </head>
 <body>
