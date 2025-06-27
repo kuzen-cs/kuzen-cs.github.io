@@ -36,29 +36,32 @@
 <!-- ランスタッド様v2.0起動用スニペット end -->
 
 <!-- ランスタッド様v2.0 KUZENタグ start -->
-<script type="text/javascript">
-  function chatOpenButton() {
-    if (window.kuzen_tag) {
-      kuzen_tag.set_custom_values('start_chat', {
-        branch: "さいたま支店",
-        branch_code: "1121",
-        job_id: "WSTM100001",
-        site_type: "オフィス",
-        job_title: "しばざテスト オフィス 2024/05/02",
-        external_media: "1"
-      });
+<script>
+  // KUZENタグを動的に読み込み（asyncの副作用を防ぐ）
+  const kuzenScript = document.createElement("script");
+  kuzenScript.src = "https://tag.kuzen.io?tag_tracking_code=KT_KwOKdDkaWKI3Fg==429";
+  kuzenScript.async = true;
+  kuzenScript.onload = function () {
+    console.log("✅ kuzen_tag loaded");
 
-      // ✅ カスタム値設定後、track()を改めて発火
-      kuzen_tag.track('start_chat');
-    }
+    // 明示的にcustom_valuesを設定
+    kuzen_tag.set_custom_values('start_chat', {
+      branch: "さいたま支店",
+      branch_code: "1121",
+      job_id: "WSTM100001",
+      site_type: "オフィス",
+      job_title: "しばざテスト オフィス 2024/05/02",
+      external_media: "1"
+    });
 
-    // ✅ チャット表示
-    if (window.cu && window.cu.web_plugin) {
-      window.cu.web_plugin.showWebplugin();
-      window.cu.web_plugin.sendMessage("この求人に応募する");
-    }
-  }
+    // track()でイベント送信
+    kuzen_tag.track('start_chat');
+    console.log("✅ custom_values sent");
+  };
+
+  document.head.appendChild(kuzenScript);
 </script>
+
 <!-- ランスタッド様v2.0 KUZENタグ end -->
 
 
