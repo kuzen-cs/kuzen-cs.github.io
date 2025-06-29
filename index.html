@@ -45,8 +45,17 @@
 
 <script>
 window.kuzenTagAsyncInit = function() {
-    window.kuzen_tag.add_query_parameter_url([]);
+    // URLからparamの値を取得
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramValue = urlParams.get('param') || '';
+
+    // クエリパラメータの配列として渡す（必要に応じて）
+    window.kuzen_tag.add_query_parameter_url(['param']);
+    
+    // カスタム値として設定
+    window.kuzen_tag.set_custom_value('param', paramValue);
 };
+
 (function() {
     var script = document.createElement('script');
     script.type = 'text/javascript';
@@ -55,6 +64,7 @@ window.kuzenTagAsyncInit = function() {
     document.head.appendChild(script);
 })();
 </script>
+
 
 
 </head>
