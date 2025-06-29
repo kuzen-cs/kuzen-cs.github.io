@@ -88,8 +88,9 @@ function chatOpenButton() {
   }
   
   document.getElementById('web_plugin_open_button').click();
-  window.cu.web_plugin.sendMessage("この求人に応募する");  
-
+  setTimeout(function () {
+    window.cu.web_plugin.sendMessage("この求人に応募する");
+  }, 500);
 };
 </script>
 
