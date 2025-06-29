@@ -85,9 +85,7 @@
 <script>
 function chatOpenButton() {
   // チャットを開く（既に定義されているならその関数を呼び出す）
-  if (typeof kuzen_tag !== 'undefined') {
-    kuzen_tag.track('start_chat'); // ← ここでイベントを送信
-  }
+  kuzen_tag.track('start_chat'); // ← ここでイベントを送信
   // window.cu.web_plugin.showWebplugin();
   document.getElementById('web_plugin_open_button').click();
   window.cu.web_plugin.sendMessage("この求人に応募する");
