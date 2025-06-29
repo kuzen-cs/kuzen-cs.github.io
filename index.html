@@ -86,10 +86,13 @@ function chatOpenButton() {
     });
     kuzen_tag.track('start_chat');
   }
+  
   document.getElementById('web_plugin_open_button').click();
-  // KUZENチャットを表示し、メッセージを送信
-  // window.cu.web_plugin.sendMessage("この求人に応募する");
-}
+  
+  setTimeout(function () {
+    window.cu.web_plugin.sendMessage("この求人に応募する");
+  }, 500);
+};
 </script>
 
 </body>
