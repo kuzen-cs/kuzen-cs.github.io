@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>子ページAのタイトル</title>
+  <meta name="description" content="これは子ページAです">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <h1>子ページA</h1>
+  <p>こちらは子ページAのコンテンツです。</p>
+
+  <!-- KUZENのスクリプトや chatOpenButton も必要に応じて同じようにコピー -->
+  <a href="javascript:chatOpenButton()">この求人に応募する</a>
+
+  <script class="kuzen_tag" type="text/javascript" src="https://tag.kuzen.io?tag_tracking_code=KT_KwOKdDkaWKI3Fg==429" async></script>
+  <script>
+    function chatOpenButton() {
+      if (typeof kuzen_tag !== 'undefined') {
+        kuzen_tag.set_custom_values('start_chat', {
+          "branch": "A支店",
+          "branch_code": "A001",
+          "job_id": "JOB-A",
+          "site_type": "現場",
+          "job_title": "子ページAの求人タイトル",
+          "external_media": "1"
+        });
+        kuzen_tag.track('start_chat');
+      }
+
+      document.getElementById('web_plugin_open_button').click();
+      setTimeout(function () {
+        window.cu.web_plugin.sendMessage("子ページAからの応募");
+      }, 300);
+    }
+  </script>
+</body>
+</html>
