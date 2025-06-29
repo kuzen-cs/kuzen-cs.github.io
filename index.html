@@ -38,10 +38,23 @@
     window.cu.web_plugin.sendMessage("この求人に応募する");
 
   kuzen_tag.track('visit');
-  kuzen_tag.set_custom_values('visit', {"branch":"さいたま支店","branch_code":"1121","job_id":"WSTM100001","site_type":"オフィス","job_title":"しばざテスト オフィス 2024/05/02","external_media":"1"});
+  kuzen_tag.set_custom_values('visit', {"branch":"さいたま支店"});
   };
 </script>
 <!-- ランスタッド様v2.0 KUZENタグ end -->
+
+<script>
+window.kuzenTagAsyncInit = function() {
+    window.kuzen_tag.add_query_parameter_url([]);
+};
+(function() {
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://tag-v2.kuzen.io?tracking_code=KT_qhyfMYG7AFPOhw%3D%3D257&line=1';
+    script.async = true;
+    document.head.appendChild(script);
+})();
+</script>
 
 
 </head>
