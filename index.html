@@ -28,9 +28,7 @@
 <!-- ランスタッド様v2.0起動用スニペット end -->
 
 <!-- ランスタッド様v2.0 KUZENタグ start -->
-<script
 
-></script>
 <!-- ランスタッド様v2.0 KUZENタグ end -->
 
 </head>
@@ -74,7 +72,8 @@
   type="text/javascript" 
   src="https://tag.kuzen.io?tag_tracking_code=KT_KwOKdDkaWKI3Fg==429"
   async
->
+></script>
+<script>
 function chatOpenButton() {
   if (typeof kuzen_tag !== 'undefined') {
     kuzen_tag.set_custom_values('start_chat', {
@@ -89,10 +88,8 @@ function chatOpenButton() {
     console.log('done')
   }
 
-  document.getElementById('web_plugin_open_button');
-
+  document.getElementById('web_plugin_open_button').click();
   // KUZENチャットを表示し、メッセージを送信
-  window.cu.web_plugin.showWebplugin(); // ← 表示処理
   window.cu.web_plugin.sendMessage("この求人に応募する"); // ← 初期メッセージ
 }
 </script>
