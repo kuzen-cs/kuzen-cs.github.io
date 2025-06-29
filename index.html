@@ -24,11 +24,6 @@
     sub_ele.parentNode.insertBefore(created_element, sub_ele);
   })(document, 'script');
 
-  function chatOpenButton() {
-    window.cu.web_plugin.showWebplugin();
-    window.cu.web_plugin.sendMessage("この求人に応募する");
-  };
-
 </script>
 <!-- ランスタッド様v2.0起動用スニペット end -->
 
@@ -88,11 +83,8 @@ function chatOpenButton() {
   if (typeof kuzen_tag !== 'undefined') {
     kuzen_tag.track('start_chat'); // ← ここでイベントを送信
   }
-
-  // 任意でチャット表示処理などを呼び出す（必要に応じて）
-  // window.__chat && window.__chat.open();
-
-  // デバッグ用：console.log("start_chatイベントが送信されました");
+  window.cu.web_plugin.showWebplugin();
+  window.cu.web_plugin.sendMessage("この求人に応募する");
 }
 </script>
 
