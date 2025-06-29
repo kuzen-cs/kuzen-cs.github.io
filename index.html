@@ -34,7 +34,6 @@
   src="https://tag.kuzen.io?tag_tracking_code=KT_KwOKdDkaWKI3Fg==429"
   async
 ></script>
-
 <!-- ランスタッド様v2.0 KUZENタグ end -->
 
 </head>
@@ -76,11 +75,9 @@
 
 <script>
 function chatOpenButton() {
-  // チャットを開く（既に定義されているならその関数を呼び出す）
-  kuzen_tag.track('start_chat'); // ← ここでイベントを送信
-  kuzen_tag.set_custom_values('start_chat', {
-    branch: "さいたま支店"
-  });
+  kuzen_tag.track('start_chat');
+  kuzen_tag.set_custom_values('start_chat', {"branch":"さいたま支店","branch_code":"1121","job_id":"WSTM100001","site_type":"オフィス","job_title":"しばざテスト オフィス 2024/05/02","external_media":"1"});
+  
   document.getElementById('web_plugin_open_button').click();
   window.cu.web_plugin.sendMessage("この求人に応募する");
 }
