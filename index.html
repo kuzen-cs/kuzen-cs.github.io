@@ -23,6 +23,12 @@
     created_element.src = __const['host'] + '/chat_app_logic.js';
     sub_ele.parentNode.insertBefore(created_element, sub_ele);
   })(document, 'script');
+
+  function chatOpenButton() {
+    window.cu.web_plugin.showWebplugin();
+    window.cu.web_plugin.sendMessage("この求人に応募する");
+  });
+
 </script>
 <!-- ランスタッド様v2.0起動用スニペット end -->
 
