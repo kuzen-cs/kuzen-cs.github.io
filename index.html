@@ -32,9 +32,7 @@
   type="text/javascript" 
   src="https://tag.kuzen.io?tag_tracking_code=KT_KwOKdDkaWKI3Fg==429"
   async
->
-  kuzen_tag.track('start_chat');
-  
+>  
   kuzen_tag.set_custom_values('visit', {});
   kuzen_tag.set_custom_values('leave', {});
   kuzen_tag.set_custom_values('start_chat', {"branch":"さいたま支店","branch_code":"","job_id":"","job_title":"","external_media":"","site_type":""});
@@ -76,5 +74,21 @@
 </aside>
 </div>
 <footer>© 2010 あなたのホームページ</footer>
-</div></body>
+</div>
+
+<script>
+function chatOpenButton() {
+  // チャットを開く（既に定義されているならその関数を呼び出す）
+  if (typeof kuzen_tag !== 'undefined') {
+    kuzen_tag.track('start_chat'); // ← ここでイベントを送信
+  }
+
+  // 任意でチャット表示処理などを呼び出す（必要に応じて）
+  // window.__chat && window.__chat.open();
+
+  // デバッグ用：console.log("start_chatイベントが送信されました");
+}
+</script>
+
+</body>
 </html>
