@@ -33,39 +33,13 @@
   src="https://tag.kuzen.io?tag_tracking_code=KT_KwOKdDkaWKI3Fg==429"
   async
 >
-    function chatOpenButton() {
-    window.cu.web_plugin.showWebplugin();
-    window.cu.web_plugin.sendMessage("この求人に応募する");
-
-  kuzen_tag.track('visit');
-  kuzen_tag.set_custom_values('visit', {"branch":"さいたま支店"});
-  };
+  kuzen_tag.track('start_chat');
+  
+  kuzen_tag.set_custom_values('visit', {});
+  kuzen_tag.set_custom_values('leave', {});
+  kuzen_tag.set_custom_values('start_chat', {"branch":"さいたま支店","branch_code":"","job_id":"","job_title":"","external_media":"","site_type":""});
 </script>
 <!-- ランスタッド様v2.0 KUZENタグ end -->
-
-<script>
-window.kuzenTagAsyncInit = function() {
-    // URLからparamの値を取得
-    const urlParams = new URLSearchParams(window.location.search);
-    const paramValue = urlParams.get('param') || '';
-
-    // クエリパラメータの配列として渡す（必要に応じて）
-    window.kuzen_tag.add_query_parameter_url(['param']);
-    
-    // カスタム値として設定
-    window.kuzen_tag.set_custom_value('param', paramValue);
-};
-
-(function() {
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = 'https://tag-v2.kuzen.io?tracking_code=KT_qhyfMYG7AFPOhw%3D%3D257&line=1';
-    script.async = true;
-    document.head.appendChild(script);
-})();
-</script>
-
-
 
 </head>
 <body>
