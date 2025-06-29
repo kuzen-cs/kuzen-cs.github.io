@@ -5,6 +5,24 @@
   <title>子ページAのタイトル</title>
   <meta name="description" content="これは子ページAです">
   <link rel="stylesheet" href="index.css">
+
+<script type="text/javascript">
+  var __const = window.__const || [];
+  __const['host'] = "https://cbgw.kuzen.io";
+  __const['access_token'] = "299a8d995206e05f3174fe7b8c058526";
+  __const['secret_token'] = "0beb1908c884e7c642971ca0d6e318e9";
+  var app = (function(doc, scr){
+    var created_element = doc.createElement(scr),
+        sub_ele = doc.getElementsByTagName(scr)[0];
+    created_element.type = 'text/javascript'
+    created_element.async = true;
+    created_element.setAttribute('charset','utf-8');
+    created_element.src = __const['host'] + '/chat_app_logic.js';
+    sub_ele.parentNode.insertBefore(created_element, sub_ele);
+  })(document, 'script');
+
+</script>
+
 </head>
 <body>
   <h1>子ページA</h1>
