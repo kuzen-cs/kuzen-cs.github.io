@@ -28,14 +28,6 @@
 <!-- ランスタッド様v2.0起動用スニペット end -->
 
 <!-- ランスタッド様v2.0 KUZENタグ start -->
-<script>
-  window.kuzenTagAsyncInit = function () {
-    kuzen_tag.set_custom_values('start_chat', {
-      branch: "さいたま支店"
-    });
-  };
-</script>
-
 <script
   class="kuzen_tag"
   type="text/javascript" 
@@ -86,7 +78,9 @@
 function chatOpenButton() {
   // チャットを開く（既に定義されているならその関数を呼び出す）
   kuzen_tag.track('start_chat'); // ← ここでイベントを送信
-  // window.cu.web_plugin.showWebplugin();
+  kuzen_tag.set_custom_values('start_chat', {
+    branch: "さいたま支店"
+  });
   document.getElementById('web_plugin_open_button').click();
   window.cu.web_plugin.sendMessage("この求人に応募する");
 }
