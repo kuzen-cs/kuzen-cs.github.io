@@ -28,7 +28,31 @@
 <!-- ランスタッド様v2.0起動用スニペット end -->
 
 <!-- ランスタッド様v2.0 KUZENタグ start -->
-
+<script class="kuzen_tag"
+  type="text/javascript" 
+  src="https://tag.kuzen.io?tag_tracking_code=KT_KwOKdDkaWKI3Fg==429"
+  async
+></script>
+<script>
+function chatOpenButton() {  
+  if (typeof kuzen_tag !== 'undefined') {
+    kuzen_tag.set_custom_values('start_chat', {
+      "branch": "さいたま支店",
+      "branch_code": "1121",
+      "job_id": "WSTM100001",
+      "site_type": "オフィス",
+      "job_title": "しばざテスト オフィス 2024/05/02",
+      "external_media": "1"
+    });
+    kuzen_tag.track('start_chat');
+  }
+  
+  document.getElementById('web_plugin_open_button').click();
+  setTimeout(function () {
+    window.cu.web_plugin.sendMessage("この求人に応募する");
+  }, 300);
+};
+</script>
 <!-- ランスタッド様v2.0 KUZENタグ end -->
 
 </head>
@@ -74,31 +98,6 @@
 <footer>© 2010 あなたのホームページ</footer>
 </div>
 
-<script class="kuzen_tag"
-  type="text/javascript" 
-  src="https://tag.kuzen.io?tag_tracking_code=KT_KwOKdDkaWKI3Fg==429"
-  async
-></script>
-<script>
-function chatOpenButton() {  
-  if (typeof kuzen_tag !== 'undefined') {
-    kuzen_tag.set_custom_values('start_chat', {
-      "branch": "さいたま支店",
-      "branch_code": "1121",
-      "job_id": "WSTM100001",
-      "site_type": "オフィス",
-      "job_title": "しばざテスト オフィス 2024/05/02",
-      "external_media": "1"
-    });
-    kuzen_tag.track('start_chat');
-  }
-  
-  document.getElementById('web_plugin_open_button').click();
-  setTimeout(function () {
-    window.cu.web_plugin.sendMessage("この求人に応募する");
-  }, 300);
-};
-</script>
 
 </body>
 </html>
