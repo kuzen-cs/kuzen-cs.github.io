@@ -8,43 +8,79 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="index.css">
 
-<!-- ランスタッド様v2.0起動用スニペット start -->
-<!-- <script type="text/javascript">
-  var __const = window.__const || [];
-  __const['host'] = "https://cbgw.kuzen.io";
-  __const['access_token'] = "299a8d995206e05f3174fe7b8c058526";
-  __const['secret_token'] = "0beb1908c884e7c642971ca0d6e318e9";
-  var app = (function(doc, scr){
-    var created_element = doc.createElement(scr),
-        sub_ele = doc.getElementsByTagName(scr)[0];
-    created_element.type = 'text/javascript'
-    created_element.async = true;
-    created_element.setAttribute('charset','utf-8');
-    created_element.src = __const['host'] + '/chat_app_logic.js';
-    sub_ele.parentNode.insertBefore(created_element, sub_ele);
-  })(document, 'script');
 
-</script> -->
-<!-- ランスタッド様v2.0起動用スニペット end -->
-  
-<!-- WARC様KUZENタグスニペット start -->
-<!--   <script>
-window.kuzenTagAsyncInit = function() {
-    window.kuzen_tag.add_query_parameter_url([]);
-};
-(function() {
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = 'https://tag-v2.kuzen.io?tracking_code=KT_b4OkNTk6rlbqgw%3D%3D470&line=1';
-    script.async = true;
-    document.head.appendChild(script);
-})();
-</script> -->
-<!-- WARC様KUZENタグスニペット end -->
+<!-- JOBit様広告ID連携パラメ引き回しタグ start -->
+<script>
+  (function () {
+    var domainsToDecorate = 
+      'liff.line.me',
+      'cbgw.kuzen.io',
+      'kuzen-cs.github.io'
+    ];
+    var queryParams = [
+      'utm_medium',
+      'utm_source',
+      'utm_term',
+      'gclid',
+      'yclid'
+    ];
 
-<!-- アイトリガー様ポップアップ検証 start -->
-  <script>(function() {var script = document.createElement('script');script.type = 'text/javascript';script.src = 'https://popup.kuzen.io/';script.className = 'exit_intent_popup';script.setAttribute('data-params', '{}');script.setAttribute('data-secretkey', 'ee505fc9-e968-4edc-9028-639ee659e4b3');script.async = true;document.head.appendChild(script);})();</script>
-<!-- アイトリガー様ポップアップ検証 end -->
+    var links = document.querySelectorAll('a');
+
+    for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
+      for (var domainIndex = 0; domainIndex < domainsToDecorate.length; domainIndex++) {
+        if (
+          links[linkIndex].href.indexOf(domainsToDecorate[domainIndex]) > -1 &&
+          links[linkIndex].href.indexOf('#') === -1 &&
+          !hasExistingQueryParams(links[linkIndex].href, queryParams)
+        ) {
+          var url = new URL(links[linkIndex].href);
+          var pathname = url.pathname;
+          if (pathname.startsWith('/area/')) {
+            var areaValue = pathname.substring(6); // '/area/'.length
+            links[linkIndex].href = url.origin + url.search + '&area=' + areaValue;
+          }
+          links[linkIndex].href = decorateUrl(links[linkIndex].href);
+        }
+      }
+    }
+
+    function decorateUrl(urlToDecorate) {
+      urlToDecorate =
+        urlToDecorate.indexOf('?') === -1
+          ? urlToDecorate + '?'
+          : urlToDecorate + '&';
+      var collectedQueryParams = [];
+      for (var queryIndex = 0; queryIndex < queryParams.length; queryIndex++) {
+        if (getQueryParam(queryParams[queryIndex])) {
+          collectedQueryParams.push(
+            queryParams[queryIndex] +
+              '=' +
+              getQueryParam(queryParams[queryIndex])
+          );
+        }
+      }
+      return collectedQueryParams.length === 0
+        ? urlToDecorate.slice(0, -1)
+        : urlToDecorate + '&' + collectedQueryParams.join('&');
+    }
+
+    function getQueryParam(name) {
+      if (
+        (name = new RegExp(
+          '[?&]' + encodeURIComponent(name) + '=([^&]*)'
+        ).exec(window.location.search))
+      )
+        return decodeURIComponent(name[1]);
+    }
+
+    function hasExistingQueryParams(url, queryParams) {
+      var regexPattern = '\\b(' + queryParams.join('|') + ')\\b=';
+      return new RegExp(regexPattern, 'i').test(url);
+    }
+  })();
+</script>
+<!-- JOBit様広告ID連携パラメ引き回しタグ end -->
 
   
 </head>
@@ -159,34 +195,6 @@ window.kuzenTagAsyncInit = function() {
 </div>
 <footer>© 2010 あなたのホームページ</footer>
 </div>
-
-<!-- ランスタッド様v2.0 KUZENタグ start -->
-<!-- <script class="kuzen_tag"
-  type="text/javascript" 
-  src="https://tag.kuzen.io?tag_tracking_code=KT_KwOKdDkaWKI3Fg==429"
-  async
-></script>
-<script>
-function chatOpenButton() {  
-  if (typeof kuzen_tag !== 'undefined') {
-    kuzen_tag.set_custom_values('start_chat', {
-      "branch": "さいたま支店",
-      "branch_code": "1121",
-      "job_id": "WSTM100001",
-      "site_type": "オフィス",
-      "job_title": "しばざテスト オフィス 2024/05/02",
-      "external_media": "1"
-    });
-    kuzen_tag.track('start_chat');
-  }
-  
-  document.getElementById('web_plugin_open_button').click();
-  setTimeout(function () {
-    window.cu.web_plugin.sendMessage("この求人に応募する");
-  }, 500);
-};
-</script> -->
-<!-- ランスタッド様v2.0 KUZENタグ end -->
 
 </body>
 </html>
