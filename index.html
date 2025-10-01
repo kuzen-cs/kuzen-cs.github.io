@@ -107,74 +107,73 @@
 
 <!-- JOBit様広告ID連携パラメ引き回しタグ start -->
 <script>
-  (function () {
-    var domainsToDecorate = 
-      'liff.line.me',
-      'cbgw.kuzen.io',
-      'kuzen-cs.github.io'
-    ];
-    var queryParams = [
-      'utm_medium',
-      'utm_source',
-      'utm_term',
-      'gclid',
-      'yclid'
-    ];
+document.addEventListener('DOMContentLoaded', function() {
+  const domainsToDecorate = [
+    'liff.line.me',
+    'cbgw.kuzen.io'
+    'kuzen-cs.github.io'
+  ];
+  
+  // 付与したいパラメータのリスト
+  const paramsToAppend = [
+    'utm_medium',
+    'utm_source',
+    'utm_term',
+    'gclid',
+    'yclid'
+  ];
 
-    var links = document.querySelectorAll('a');
+  // 現在のページのURLから付与すべきパラメータを取得
+  const currentUrlParams = new URLSearchParams(window.location.search);
+  const paramsToAdd = new URLSearchParams();
 
-    for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
-      for (var domainIndex = 0; domainIndex < domainsToDecorate.length; domainIndex++) {
-        if (
-          links[linkIndex].href.indexOf(domainsToDecorate[domainIndex]) > -1 &&
-          links[linkIndex].href.indexOf('#') === -1 &&
-          !hasExistingQueryParams(links[linkIndex].href, queryParams)
-        ) {
-          var url = new URL(links[linkIndex].href);
-          var pathname = url.pathname;
-          if (pathname.startsWith('/area/')) {
-            var areaValue = pathname.substring(6); // '/area/'.length
-            links[linkIndex].href = url.origin + url.search + '&area=' + areaValue;
-          }
-          links[linkIndex].href = decorateUrl(links[linkIndex].href);
-        }
+  paramsToAppend.forEach(param => {
+    if (currentUrlParams.has(param)) {
+      paramsToAdd.set(param, currentUrlParams.get(param));
+    }
+  });
+
+  // 付与するパラメータがなければ何もしない
+  if ([...paramsToAdd].length === 0) {
+    return;
+  }
+
+  // ページ内のすべてのリンクを処理
+  document.querySelectorAll('a').forEach(link => {
+    // リンク先が空、またはアンカーリンクの場合はスキップ
+    if (!link.href || link.href.includes('#')) {
+      return;
+    }
+
+    try {
+      const linkUrl = new URL(link.href);
+
+      // 対象ドメインかチェック
+      const isTargetDomain = domainsToDecorate.some(domain => linkUrl.hostname.includes(domain));
+      if (!isTargetDomain) {
+        return;
       }
-    }
 
-    function decorateUrl(urlToDecorate) {
-      urlToDecorate =
-        urlToDecorate.indexOf('?') === -1
-          ? urlToDecorate + '?'
-          : urlToDecorate + '&';
-      var collectedQueryParams = [];
-      for (var queryIndex = 0; queryIndex < queryParams.length; queryIndex++) {
-        if (getQueryParam(queryParams[queryIndex])) {
-          collectedQueryParams.push(
-            queryParams[queryIndex] +
-              '=' +
-              getQueryParam(queryParams[queryIndex])
-          );
-        }
+      // /area/パスの特別処理
+      if (linkUrl.pathname.startsWith('/area/')) {
+          const areaValue = linkUrl.pathname.substring(6); // '/area/'.length
+          linkUrl.searchParams.set('area', areaValue);
       }
-      return collectedQueryParams.length === 0
-        ? urlToDecorate.slice(0, -1)
-        : urlToDecorate + '&' + collectedQueryParams.join('&');
-    }
 
-    function getQueryParam(name) {
-      if (
-        (name = new RegExp(
-          '[?&]' + encodeURIComponent(name) + '=([^&]*)'
-        ).exec(window.location.search))
-      )
-        return decodeURIComponent(name[1]);
-    }
+      // 取得したパラメータをリンクに追加
+      paramsToAdd.forEach((value, key) => {
+        linkUrl.searchParams.set(key, value);
+      });
 
-    function hasExistingQueryParams(url, queryParams) {
-      var regexPattern = '\\b(' + queryParams.join('|') + ')\\b=';
-      return new RegExp(regexPattern, 'i').test(url);
+      // リンクのhrefを更新
+      link.href = linkUrl.toString();
+
+    } catch (e) {
+      // 不正なURL形式のhrefは無視
+      console.error('Invalid URL:', link.href, e);
     }
-  })();
+  });
+});
 </script>
 <!-- JOBit様広告ID連携パラメ引き回しタグ end -->
 
