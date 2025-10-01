@@ -8,80 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="index.css">
 
-
-<!-- JOBit様広告ID連携パラメ引き回しタグ start -->
-<script>
-  (function () {
-    var domainsToDecorate = 
-      'liff.line.me',
-      'cbgw.kuzen.io',
-      'kuzen-cs.github.io'
-    ];
-    var queryParams = [
-      'utm_medium',
-      'utm_source',
-      'utm_term',
-      'gclid',
-      'yclid'
-    ];
-
-    var links = document.querySelectorAll('a');
-
-    for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
-      for (var domainIndex = 0; domainIndex < domainsToDecorate.length; domainIndex++) {
-        if (
-          links[linkIndex].href.indexOf(domainsToDecorate[domainIndex]) > -1 &&
-          links[linkIndex].href.indexOf('#') === -1 &&
-          !hasExistingQueryParams(links[linkIndex].href, queryParams)
-        ) {
-          var url = new URL(links[linkIndex].href);
-          var pathname = url.pathname;
-          if (pathname.startsWith('/area/')) {
-            var areaValue = pathname.substring(6); // '/area/'.length
-            links[linkIndex].href = url.origin + url.search + '&area=' + areaValue;
-          }
-          links[linkIndex].href = decorateUrl(links[linkIndex].href);
-        }
-      }
-    }
-
-    function decorateUrl(urlToDecorate) {
-      urlToDecorate =
-        urlToDecorate.indexOf('?') === -1
-          ? urlToDecorate + '?'
-          : urlToDecorate + '&';
-      var collectedQueryParams = [];
-      for (var queryIndex = 0; queryIndex < queryParams.length; queryIndex++) {
-        if (getQueryParam(queryParams[queryIndex])) {
-          collectedQueryParams.push(
-            queryParams[queryIndex] +
-              '=' +
-              getQueryParam(queryParams[queryIndex])
-          );
-        }
-      }
-      return collectedQueryParams.length === 0
-        ? urlToDecorate.slice(0, -1)
-        : urlToDecorate + '&' + collectedQueryParams.join('&');
-    }
-
-    function getQueryParam(name) {
-      if (
-        (name = new RegExp(
-          '[?&]' + encodeURIComponent(name) + '=([^&]*)'
-        ).exec(window.location.search))
-      )
-        return decodeURIComponent(name[1]);
-    }
-
-    function hasExistingQueryParams(url, queryParams) {
-      var regexPattern = '\\b(' + queryParams.join('|') + ')\\b=';
-      return new RegExp(regexPattern, 'i').test(url);
-    }
-  })();
-</script>
-<!-- JOBit様広告ID連携パラメ引き回しタグ end -->
-
   
 </head>
 <body>
@@ -178,6 +104,79 @@
 </div>
 <footer>© 2010 あなたのホームページ</footer>
 </div>
+
+<!-- JOBit様広告ID連携パラメ引き回しタグ start -->
+<script>
+  (function () {
+    var domainsToDecorate = 
+      'liff.line.me',
+      'cbgw.kuzen.io',
+      'kuzen-cs.github.io'
+    ];
+    var queryParams = [
+      'utm_medium',
+      'utm_source',
+      'utm_term',
+      'gclid',
+      'yclid'
+    ];
+
+    var links = document.querySelectorAll('a');
+
+    for (var linkIndex = 0; linkIndex < links.length; linkIndex++) {
+      for (var domainIndex = 0; domainIndex < domainsToDecorate.length; domainIndex++) {
+        if (
+          links[linkIndex].href.indexOf(domainsToDecorate[domainIndex]) > -1 &&
+          links[linkIndex].href.indexOf('#') === -1 &&
+          !hasExistingQueryParams(links[linkIndex].href, queryParams)
+        ) {
+          var url = new URL(links[linkIndex].href);
+          var pathname = url.pathname;
+          if (pathname.startsWith('/area/')) {
+            var areaValue = pathname.substring(6); // '/area/'.length
+            links[linkIndex].href = url.origin + url.search + '&area=' + areaValue;
+          }
+          links[linkIndex].href = decorateUrl(links[linkIndex].href);
+        }
+      }
+    }
+
+    function decorateUrl(urlToDecorate) {
+      urlToDecorate =
+        urlToDecorate.indexOf('?') === -1
+          ? urlToDecorate + '?'
+          : urlToDecorate + '&';
+      var collectedQueryParams = [];
+      for (var queryIndex = 0; queryIndex < queryParams.length; queryIndex++) {
+        if (getQueryParam(queryParams[queryIndex])) {
+          collectedQueryParams.push(
+            queryParams[queryIndex] +
+              '=' +
+              getQueryParam(queryParams[queryIndex])
+          );
+        }
+      }
+      return collectedQueryParams.length === 0
+        ? urlToDecorate.slice(0, -1)
+        : urlToDecorate + '&' + collectedQueryParams.join('&');
+    }
+
+    function getQueryParam(name) {
+      if (
+        (name = new RegExp(
+          '[?&]' + encodeURIComponent(name) + '=([^&]*)'
+        ).exec(window.location.search))
+      )
+        return decodeURIComponent(name[1]);
+    }
+
+    function hasExistingQueryParams(url, queryParams) {
+      var regexPattern = '\\b(' + queryParams.join('|') + ')\\b=';
+      return new RegExp(regexPattern, 'i').test(url);
+    }
+  })();
+</script>
+<!-- JOBit様広告ID連携パラメ引き回しタグ end -->
 
 </body>
 </html>
