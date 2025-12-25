@@ -673,9 +673,62 @@
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="assets/js/page.js"></script>
   
-
-  
 <script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function() {
+    // 対象ドメイン
+    var targetDomains = ["liff.line.me", "cbgw.kuzen.io", "picasso-introduction.com"];
+
+    // ▼▼▼ 元のコードにあった制限リスト ▼▼▼
+    // このリストに含まれるパラメータしか引き継ぎません
+    var allowedParams = ["utm_medium", "utm_source", "utm_term", "gclid", "yclid"];
+
+    var currentParams = new URLSearchParams(window.location.search);
+    var paramsToAppend = new URLSearchParams();
+    var hasAllowedParams = false;
+
+    // URLにあるパラメータが、リストに含まれている場合のみ取得する
+    allowedParams.forEach(function(key) {
+        if (currentParams.has(key)) {
+            paramsToAppend.set(key, currentParams.get(key));
+            hasAllowedParams = true;
+        }
+    });
+
+    // リストにあるパラメータが1つもなければ処理を終了（これが原因で動かなかった可能性大）
+    if (!hasAllowedParams) return;
+
+    var links = document.querySelectorAll("a");
+    
+    for (var i = 0; i < links.length; i++) {
+        var anchor = links[i];
+        if (anchor.href && anchor.href.indexOf("http") === 0) {
+            try {
+                var url = new URL(anchor.href);
+                var isTarget = false;
+
+                for (var j = 0; j < targetDomains.length; j++) {
+                    if (url.hostname.indexOf(targetDomains[j]) !== -1) {
+                        isTarget = true;
+                        break;
+                    }
+                }
+
+                if (isTarget) {
+                    // 抽出した「許可されたパラメータ」のみ付与
+                    paramsToAppend.forEach(function(value, key) {
+                        url.searchParams.set(key, value);
+                    });
+                    anchor.href = url.toString();
+                }
+            } catch (e) {
+                console.error("Linker Error:", e);
+            }
+        }
+    }
+});
+</script>
+  
+<!-- <script type="text/javascript">
 document.addEventListener("DOMContentLoaded", function() {
     // パラメータを引き継がせたい対象のドメイン
     var targetDomains = ["liff.line.me", "cbgw.kuzen.io", "picasso-introduction.com"];
@@ -723,6 +776,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 });
-</script>
+</script> -->
 
 </body></html>
