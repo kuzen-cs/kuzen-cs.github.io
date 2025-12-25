@@ -673,60 +673,68 @@
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="assets/js/page.js"></script>
   
-<script type="text/javascript">
-document.addEventListener("DOMContentLoaded", function() {
-    // 対象ドメイン
-    var targetDomains = ["liff.line.me", "cbgw.kuzen.io", "picasso-introduction.com"];
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const domainsToDecorate = [
+    'liff.line.me',
+    'cbgw.kuzen.io',
+    'picasso-introduction.com'
+  ];
+  
+  // 付与したいパラメータのリスト
+  const paramsToAppend = [
+    'utm_medium',
+    'utm_source',
+    'utm_term',
+    'gclid',
+    'yclid'
+  ];
 
-    // ▼▼▼ 元のコードにあった制限リスト ▼▼▼
-    // このリストに含まれるパラメータしか引き継ぎません
-    var allowedParams = ["utm_medium", "utm_source", "utm_term", "gclid", "yclid"];
+  const currentUrlParams = new URLSearchParams(window.location.search);
+  const paramsToAdd = new URLSearchParams();
 
-    var currentParams = new URLSearchParams(window.location.search);
-    var paramsToAppend = new URLSearchParams();
-    var hasAllowedParams = false;
-
-    // URLにあるパラメータが、リストに含まれている場合のみ取得する
-    allowedParams.forEach(function(key) {
-        if (currentParams.has(key)) {
-            paramsToAppend.set(key, currentParams.get(key));
-            hasAllowedParams = true;
-        }
-    });
-
-    // リストにあるパラメータが1つもなければ処理を終了（これが原因で動かなかった可能性大）
-    if (!hasAllowedParams) return;
-
-    var links = document.querySelectorAll("a");
-    
-    for (var i = 0; i < links.length; i++) {
-        var anchor = links[i];
-        if (anchor.href && anchor.href.indexOf("http") === 0) {
-            try {
-                var url = new URL(anchor.href);
-                var isTarget = false;
-
-                for (var j = 0; j < targetDomains.length; j++) {
-                    if (url.hostname.indexOf(targetDomains[j]) !== -1) {
-                        isTarget = true;
-                        break;
-                    }
-                }
-
-                if (isTarget) {
-                    // 抽出した「許可されたパラメータ」のみ付与
-                    paramsToAppend.forEach(function(value, key) {
-                        url.searchParams.set(key, value);
-                    });
-                    anchor.href = url.toString();
-                }
-            } catch (e) {
-                console.error("Linker Error:", e);
-            }
-        }
+  paramsToAppend.forEach(param => {
+    if (currentUrlParams.has(param)) {
+      paramsToAdd.set(param, currentUrlParams.get(param));
     }
+  });
+
+  if ([...paramsToAdd].length === 0) {
+    return;
+  }
+
+  document.querySelectorAll('a').forEach(link => {
+    if (!link.href || link.href.includes('#')) {
+      return;
+    }
+
+    try {
+      const linkUrl = new URL(link.href);
+
+      const isTargetDomain = domainsToDecorate.some(domain => linkUrl.hostname.includes(domain));
+      if (!isTargetDomain) {
+        return;
+      }
+
+      if (linkUrl.pathname.startsWith('/area/')) {
+          const areaValue = linkUrl.pathname.substring(6); // '/area/'.length
+          linkUrl.searchParams.set('area', areaValue);
+      }
+
+      paramsToAdd.forEach((value, key) => {
+        linkUrl.searchParams.set(key, value);
+      });
+
+      link.href = linkUrl.toString();
+
+    } catch (e) {
+      console.error('Invalid URL:', link.href, e);
+    }
+  });
 });
 </script>
+
+
   
 <!-- <script type="text/javascript">
 document.addEventListener("DOMContentLoaded", function() {
