@@ -10,10 +10,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="index.css">
 
-  
+  <script>(function() {var script = document.createElement('script');script.type = 'text/javascript';script.src = 'https://popup.kuzen.io/';script.className = 'exit_intent_popup';script.setAttribute('data-params', '{}');script.setAttribute('data-secretkey', '54df3c6a-cd4c-4f72-a68c-9b4626b6ec9e');script.async = true;document.head.appendChild(script);})();</script>
 </head>
 <body>
-  <script>(function() {var script = document.createElement('script');script.type = 'text/javascript';script.src = 'https://popup.kuzen.io/';script.className = 'exit_intent_popup';script.setAttribute('data-params', '{}');script.setAttribute('data-secretkey', '33482c2f-c3d0-48a0-b232-e5e1de8ca4a1');script.async = true;document.head.appendChild(script);})();</script>
+  
 <div id="outer">
 <header><div id="header-container"><div id="head-inner"><h1>あなたのＨＰタイトル</h1>
 <p class="description">あなたのＨＰの説明文</p></div></div>
@@ -107,78 +107,6 @@
 </div>
 <footer>© 2010 あなたのホームページ</footer>
 </div>
-
-<!-- JOBit様広告ID連携パラメ引き回しタグ start -->
-<!-- <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const domainsToDecorate = [
-    'liff.line.me',
-    'cbgw.kuzen.io',
-    'kuzen-cs.github.io'
-  ];
-  
-  // 付与したいパラメータのリスト
-  const paramsToAppend = [
-    'utm_medium',
-    'utm_source',
-    'utm_term',
-    'gclid',
-    'yclid'
-  ];
-
-  // 現在のページのURLから付与すべきパラメータを取得
-  const currentUrlParams = new URLSearchParams(window.location.search);
-  const paramsToAdd = new URLSearchParams();
-
-  paramsToAppend.forEach(param => {
-    if (currentUrlParams.has(param)) {
-      paramsToAdd.set(param, currentUrlParams.get(param));
-    }
-  });
-
-  // 付与するパラメータがなければ何もしない
-  if ([...paramsToAdd].length === 0) {
-    return;
-  }
-
-  // ページ内のすべてのリンクを処理
-  document.querySelectorAll('a').forEach(link => {
-    // リンク先が空、またはアンカーリンクの場合はスキップ
-    if (!link.href || link.href.includes('#')) {
-      return;
-    }
-
-    try {
-      const linkUrl = new URL(link.href);
-
-      // 対象ドメインかチェック
-      const isTargetDomain = domainsToDecorate.some(domain => linkUrl.hostname.includes(domain));
-      if (!isTargetDomain) {
-        return;
-      }
-
-      // /area/パスの特別処理
-      if (linkUrl.pathname.startsWith('/area/')) {
-          const areaValue = linkUrl.pathname.substring(6); // '/area/'.length
-          linkUrl.searchParams.set('area', areaValue);
-      }
-
-      // 取得したパラメータをリンクに追加
-      paramsToAdd.forEach((value, key) => {
-        linkUrl.searchParams.set(key, value);
-      });
-
-      // リンクのhrefを更新
-      link.href = linkUrl.toString();
-
-    } catch (e) {
-      // 不正なURL形式のhrefは無視
-      console.error('Invalid URL:', link.href, e);
-    }
-  });
-});
-</script> -->
-<!-- JOBit様広告ID連携パラメ引き回しタグ end -->
 
 
   
